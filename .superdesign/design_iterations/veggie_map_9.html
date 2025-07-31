@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>會員中心 - 台中素食地圖</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="veggie_map_theme_1.css">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+    <style>
+        :root {
+            --background: oklch(0.98 0.01 90);
+            --foreground: oklch(0.25 0 0);
+            --primary: oklch(0.55 0.1 145);
+            --secondary: oklch(0.95 0.01 90);
+            --border: oklch(0.9 0.01 90);
+            --font-sans: 'Noto Sans JP', sans-serif;
+            --font-serif: 'Noto Serif JP', serif;
+        }
+
+        body {
+            background-color: var(--secondary);
+            color: var(--foreground);
+            font-family: var(--font-sans);
+        }
+
+        h1, h2, h3, .font-serif {
+            font-family: var(--font-serif);
+        }
+
+        .text-primary { color: var(--primary); }
+        .bg-primary { background-color: var(--primary); }
+        .border-primary { border-color: var(--primary); }
+
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            transition: background-color 0.2s, color 0.2s;
+            font-weight: 500;
+        }
+        .sidebar-link:hover {
+            background-color: var(--border);
+        }
+        .sidebar-link.active {
+            background-color: var(--primary);
+            color: var(--primary-foreground);
+        }
+        .sidebar-link.active i {
+            color: var(--primary-foreground);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade-in-up {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="sticky top-0 bg-[var(--background)] bg-opacity-80 backdrop-blur-sm border-b border-[var(--border)] z-20">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <a href="veggie_map_1.html" class="flex items-center space-x-2 text-lg font-serif font-bold">
+                    <i data-lucide="leaf" class="text-primary"></i>
+                    <span>台中素食地圖</span>
+                </a>
+                <nav class="hidden md:flex items-center space-x-6">
+                    <a href="veggie_map_2.html" class="text-[var(--foreground)] hover:text-primary transition-colors">探索餐廳</a>
+                    <a href="veggie_map_3.html" class="text-[var(--foreground)] hover:text-primary transition-colors">深度報導</a>
+                    <a href="veggie_map_4.html" class="text-[var(--foreground)] hover:text-primary transition-colors">社群食記</a>
+                </nav>
+                <div class="flex items-center space-x-4">
+                    <a href="veggie_map_9.html" class="hidden sm:flex items-center gap-2 text-sm font-medium text-primary">
+                        <img src="https://i.pravatar.cc/28?u=userA" class="w-7 h-7 rounded-full" alt="avatar">
+                        <span>會員中心</span>
+                    </a>
+                    <button class="md:hidden">
+                        <i data-lucide="menu"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto px-4 py-12">
+        <div class="grid md:grid-cols-12 gap-8">
+            <!-- Sidebar -->
+            <aside class="md:col-span-3 animate-fade-in-up">
+                <div class="bg-[var(--background)] border border-[var(--border)] rounded-xl p-4">
+                    <div class="text-center p-4 border-b border-[var(--border)] mb-4">
+                        <img src="https://i.pravatar.cc/80?u=userA" class="w-20 h-20 rounded-full mx-auto mb-3" alt="avatar">
+                        <h3 class="font-bold font-serif">旅食小光</h3>
+                        <p class="text-sm text-[var(--muted-foreground)]">user.a@example.com</p>
+                    </div>
+                    <nav class="space-y-2">
+                        <a href="#" class="sidebar-link">
+                            <i data-lucide="user" class="w-5 h-5 mr-3 text-[var(--muted-foreground)]"></i>
+                            <span>我的個人檔案</span>
+                        </a>
+                        <a href="#" class="sidebar-link active">
+                            <i data-lucide="star" class="w-5 h-5 mr-3"></i>
+                            <span>我發表的食記</span>
+                        </a>
+                        <a href="#" class="sidebar-link">
+                            <i data-lucide="heart" class="w-5 h-5 mr-3 text-[var(--muted-foreground)]"></i>
+                            <span>我的收藏店家</span>
+                        </a>
+                        <a href="veggie_map_7.html" class="sidebar-link">
+                            <i data-lucide="plus" class="w-5 h-5 mr-3 text-[var(--muted-foreground)]"></i>
+                            <span>發表新食記</span>
+                        </a>
+                        <div class="border-t border-[var(--border)] my-2 !mt-4 !mb-2"></div>
+                        <a href="#" class="sidebar-link">
+                            <i data-lucide="log-out" class="w-5 h-5 mr-3 text-[var(--muted-foreground)]"></i>
+                            <span>登出</span>
+                        </a>
+                    </nav>
+                </div>
+            </aside>
+
+            <!-- Content Area -->
+            <div class="md:col-span-9 animate-fade-in-up" style="animation-delay: 0.2s;">
+                <div class="bg-[var(--background)] border border-[var(--border)] rounded-xl p-6 md:p-8">
+                    <h2 class="text-2xl md:text-3xl font-bold font-serif mb-6">我發表的食記</h2>
+                    
+                    <div class="space-y-6">
+                        <!-- Review Item 1 -->
+                        <div class="flex flex-col sm:flex-row items-start gap-4 p-4 border border-[var(--border)] rounded-lg">
+                            <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=400&auto=format&fit=crop" class="w-full sm:w-32 h-32 object-cover rounded-md flex-shrink-0">
+                            <div class="flex-grow">
+                                <p class="text-xs text-[var(--muted-foreground)]">發表於 2025-07-30</p>
+                                <h3 class="font-bold font-serif text-lg my-1">森林旁邊 <span class="text-yellow-500">★★★★☆</span></h3>
+                                <p class="text-sm text-[var(--muted-foreground)] line-clamp-2">氣氛超棒的創意料理，適合約會或朋友聚餐，推薦他們的松露燉飯。</p>
+                            </div>
+                            <div class="flex-shrink-0 flex sm:flex-col gap-2 w-full sm:w-auto">
+                                <button class="w-full text-sm bg-[var(--secondary)] hover:bg-[var(--border)] px-4 py-2 rounded-md">編輯</button>
+                                <button class="w-full text-sm text-red-600 hover:bg-red-50 px-4 py-2 rounded-md">刪除</button>
+                            </div>
+                        </div>
+
+                        <!-- Review Item 2 -->
+                        <div class="flex flex-col sm:flex-row items-start gap-4 p-4 border border-[var(--border)] rounded-lg">
+                            <img src="https://images.unsplash.com/photo-1478144592103-25e218a0c110?q=80&w=400&auto=format&fit=crop" class="w-full sm:w-32 h-32 object-cover rounded-md flex-shrink-0">
+                            <div class="flex-grow">
+                                <p class="text-xs text-[var(--muted-foreground)]">發表於 2025-07-22</p>
+                                <h3 class="font-bold font-serif text-lg my-1">Veganday <span class="text-yellow-500">★★★★★</span></h3>
+                                <p class="text-sm text-[var(--muted-foreground)] line-clamp-2">他們的純素肉桂捲真的太神奇了，外酥內軟，搭配一杯燕麥奶拿鐵，完美的下午茶。</p>
+                            </div>
+                            <div class="flex-shrink-0 flex sm:flex-col gap-2 w-full sm:w-auto">
+                                <button class="w-full text-sm bg-[var(--secondary)] hover:bg-[var(--border)] px-4 py-2 rounded-md">編輯</button>
+                                <button class="w-full text-sm text-red-600 hover:bg-red-50 px-4 py-2 rounded-md">刪除</button>
+                            </div>
+                        </div>
+
+                         <!-- Pagination -->
+                        <nav class="flex justify-center items-center space-x-2 pt-4">
+                            <a href="#" class="p-2 text-[var(--muted-foreground)] hover:text-primary"><i data-lucide="chevron-left"></i></a>
+                            <a href="#" class="w-8 h-8 flex items-center justify-center rounded-full bg-primary text-[var(--primary-foreground)] font-bold text-sm">1</a>
+                            <a href="#" class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[var(--secondary)] text-sm">2</a>
+                            <a href="#" class="p-2 text-[var(--muted-foreground)] hover:text-primary"><i data-lucide="chevron-right"></i></a>
+                        </nav>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[var(--background)] border-t border-[var(--border)] mt-16">
+        <div class="container mx-auto px-4 py-8">
+            <div class="flex flex-col md:flex-row justify-between items-center text-sm text-[var(--muted-foreground)]">
+                <div class="flex space-x-4 mb-4 md:mb-0">
+                    <a href="#" class="hover:text-primary">關於我們</a>
+                    <a href="#" class="hover:text-primary">合作夥伴方案</a>
+                    <a href="#" class="hover:text-primary">隱私權政策</a>
+                    <a href="#" class="hover:text-primary">服務條款</a>
+                </div>
+                <p>&copy; 2025 Taichung Vege Map. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
