@@ -1,0 +1,46 @@
+:root {
+  --background: oklch(0.97 0.01 85); /* Washi Paper White */
+  --foreground: oklch(0.2 0.02 250); /* Sumi Ink Black */
+  --card: oklch(0.99 0.01 85);
+  --card-foreground: oklch(0.2 0.02 250);
+  --popover: oklch(0.99 0.01 85);
+  --popover-foreground: oklch(0.2 0.02 250);
+  --primary: oklch(0.55 0.22 28); /* Scarlet Red */
+  --primary-foreground: oklch(0.98 0.01 85);
+  --secondary: oklch(0.45 0.15 260); /* Indigo Blue */
+  --secondary-foreground: oklch(0.98 0.01 85);
+  --muted: oklch(0.92 0.01 85);
+  --muted-foreground: oklch(0.45 0.02 250);
+  --accent: oklch(0.55 0.22 28);
+  --accent-foreground: oklch(0.98 0.01 85);
+  --destructive: oklch(0.55 0.22 28);
+  --destructive-foreground: oklch(0.98 0.01 85);
+  --border: oklch(0.7 0.02 250);
+  --input: oklch(0.99 0.01 85);
+  --ring: oklch(0.55 0.22 28);
+  --chart-1: oklch(0.55 0.22 28);
+  --chart-2: oklch(0.45 0.15 260);
+  --chart-3: oklch(0.8 0.1 100);
+  --chart-4: oklch(0.6 0.15 150);
+  --chart-5: oklch(0.7 0.05 50);
+  --sidebar: oklch(0.97 0.01 85);
+  --sidebar-foreground: oklch(0.2 0.02 250);
+  --sidebar-primary: oklch(0.55 0.22 28);
+  --sidebar-primary-foreground: oklch(0.98 0.01 85);
+  --sidebar-accent: oklch(0.45 0.15 260);
+  --sidebar-accent-foreground: oklch(0.98 0.01 85);
+  --sidebar-border: oklch(0.85 0.01 85);
+  --sidebar-ring: oklch(0.55 0.22 28);
+  --font-sans: 'Yuji Syuku', serif;
+  --font-serif: 'Shippori Mincho', serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+  --radius: 0.25rem;
+  --shadow-sm: none;
+  --shadow: none;
+  --shadow-md: none;
+  --shadow-lg: none;
+  --shadow-xl: none;
+  --shadow-2xl: none;
+  --shadow-inner: none;
+  --spacing: 0.25rem;
+}
