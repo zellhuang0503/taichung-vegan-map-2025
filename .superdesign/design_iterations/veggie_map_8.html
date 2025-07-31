@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登入/註冊 - 台中素食地圖</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="veggie_map_theme_1.css">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+    <style>
+        :root {
+            --background: oklch(0.98 0.01 90);
+            --foreground: oklch(0.25 0 0);
+            --primary: oklch(0.55 0.1 145);
+            --secondary: oklch(0.95 0.01 90);
+            --border: oklch(0.9 0.01 90);
+            --input: oklch(0.97 0.01 90);
+            --font-sans: 'Noto Sans JP', sans-serif;
+            --font-serif: 'Noto Serif JP', serif;
+        }
+
+        body {
+            background-color: var(--secondary); /* Use secondary for the page background to highlight the card */
+            color: var(--foreground);
+            font-family: var(--font-sans);
+        }
+
+        h1, h2, h3, .font-serif {
+            font-family: var(--font-serif);
+        }
+
+        .text-primary { color: var(--primary); }
+        .bg-primary { background-color: var(--primary); }
+        .border-primary { border-color: var(--primary); }
+        .ring-primary { --tw-ring-color: var(--primary); }
+        
+        .form-input {
+            width: 100%;
+            background-color: var(--input);
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            padding: 0.75rem 1rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            --tw-ring-opacity: 0.5;
+            box-shadow: 0 0 0 2px var(--ring-color);
+        }
+
+        .tab-button {
+            transition: color 0.2s, border-color 0.2s;
+            border-bottom: 2px solid transparent;
+        }
+        .tab-button.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade-in-up {
+            opacity: 0;
+            animation: fadeInUp 0.5s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="sticky top-0 bg-[var(--background)] bg-opacity-80 backdrop-blur-sm border-b border-[var(--border)] z-20">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <a href="veggie_map_1.html" class="flex items-center space-x-2 text-lg font-serif font-bold">
+                    <i data-lucide="leaf" class="text-primary"></i>
+                    <span>台中素食地圖</span>
+                </a>
+                <nav class="hidden md:flex items-center space-x-6">
+                    <a href="veggie_map_2.html" class="text-[var(--foreground)] hover:text-primary transition-colors">探索餐廳</a>
+                    <a href="veggie_map_3.html" class="text-[var(--foreground)] hover:text-primary transition-colors">深度報導</a>
+                    <a href="veggie_map_4.html" class="text-[var(--foreground)] hover:text-primary transition-colors">社群食記</a>
+                </nav>
+                <div class="flex items-center space-x-4">
+                    <!-- No login button on login page -->
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow flex items-center justify-center py-12 px-4">
+        <div class="w-full max-w-md animate-fade-in-up">
+            <div class="bg-[var(--background)] border border-[var(--border)] rounded-xl shadow-lg overflow-hidden">
+                <!-- Tabs -->
+                <div id="tab-nav" class="flex">
+                    <button class="tab-button active w-1/2 py-4 font-bold text-lg" data-tab="login">登入</button>
+                    <button class="tab-button w-1/2 py-4 font-bold text-lg" data-tab="register">註冊</button>
+                </div>
+
+                <!-- Tab Content -->
+                <div id="tab-content" class="p-8">
+                    <!-- Login Form -->
+                    <div id="tab-login">
+                        <form class="space-y-6">
+                            <div>
+                                <label for="login-email" class="text-sm font-medium">Email</label>
+                                <input id="login-email" type="email" placeholder="your.email@example.com" class="form-input mt-1">
+                            </div>
+                            <div>
+                                <label for="login-password" class="text-sm font-medium">密碼</label>
+                                <input id="login-password" type="password" placeholder="••••••••" class="form-input mt-1">
+                            </div>
+                            <div class="text-right">
+                                <a href="#" class="text-sm text-primary hover:underline">忘記密碼？</a>
+                            </div>
+                            <div>
+                                <button type="submit" class="w-full bg-primary text-[var(--primary-foreground)] font-bold py-3 rounded-lg hover:opacity-90 transition-opacity">登入</button>
+                            </div>
+                        </form>
+                        <div class="relative my-6">
+                            <div class="absolute inset-0 flex items-center">
+                                <div class="w-full border-t border-[var(--border)]"></div>
+                            </div>
+                            <div class="relative flex justify-center text-sm">
+                                <span class="bg-[var(--background)] px-2 text-[var(--muted-foreground)]">或使用其他方式登入</span>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <button class="w-full bg-white border border-[var(--border)] py-2.5 rounded-lg flex items-center justify-center gap-2 hover:bg-gray-50 transition-colors">
+                                <svg class="w-5 h-5" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24s8.955,20,20,20s20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"></path><path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"></path><path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"></path><path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571l6.19,5.238C42.021,35.596,44,30.138,44,24C44,22.659,43.862,21.35,43.611,20.083z"></path></svg>
+                                <span>Google</span>
+                            </button>
+                             <button class="w-full bg-[#1877F2] text-white py-2.5 rounded-lg flex items-center justify-center gap-2 hover:bg-[#166fe5] transition-colors">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path></svg>
+                                <span>Facebook</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Register Form (Initially hidden) -->
+                    <div id="tab-register" class="hidden">
+                        <form class="space-y-6">
+                            <div>
+                                <label for="register-username" class="text-sm font-medium">使用者名稱</label>
+                                <input id="register-username" type="text" placeholder="您希望大家如何稱呼您" class="form-input mt-1">
+                            </div>
+                            <div>
+                                <label for="register-email" class="text-sm font-medium">Email</label>
+                                <input id="register-email" type="email" placeholder="your.email@example.com" class="form-input mt-1">
+                            </div>
+                            <div>
+                                <label for="register-password" class="text-sm font-medium">密碼</label>
+                                <input id="register-password" type="password" placeholder="至少8個字元" class="form-input mt-1">
+                            </div>
+                            <div>
+                                <button type="submit" class="w-full bg-primary text-[var(--primary-foreground)] font-bold py-3 rounded-lg hover:opacity-90 transition-opacity">建立帳號</button>
+                            </div>
+                        </form>
+                        <p class="text-xs text-center text-[var(--muted-foreground)] mt-6">
+                            註冊即表示您同意我們的 <a href="#" class="underline hover:text-primary">服務條款</a> 與 <a href="#" class="underline hover:text-primary">隱私權政策</a>。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        lucide.createIcons();
+
+        const tabNav = document.getElementById('tab-nav');
+        const tabContent = document.getElementById('tab-content');
+
+        if (tabNav && tabContent) {
+            const buttons = tabNav.querySelectorAll('.tab-button');
+            const contents = tabContent.children;
+
+            tabNav.addEventListener('click', (e) => {
+                const button = e.target.closest('.tab-button');
+                if (!button) return;
+
+                const tabId = button.dataset.tab;
+
+                // Update buttons
+                buttons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                // Update content
+                Array.from(contents).forEach(content => {
+                    if (content.id === `tab-${tabId}`) {
+                        content.classList.remove('hidden');
+                    } else {
+                        content.classList.add('hidden');
+                    }
+                });
+            });
+        }
+    </script>
+</body>
+</html>
