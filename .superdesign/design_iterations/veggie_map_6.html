@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>報導文章 - 台中素食地圖</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="veggie_map_theme_1.css">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+    <style>
+        :root {
+            --background: oklch(0.98 0.01 90);
+            --foreground: oklch(0.25 0 0);
+            --primary: oklch(0.55 0.1 145);
+            --secondary: oklch(0.95 0.01 90);
+            --border: oklch(0.9 0.01 90);
+            --font-sans: 'Noto Sans JP', sans-serif;
+            --font-serif: 'Noto Serif JP', serif;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--foreground);
+            font-family: var(--font-sans);
+        }
+
+        h1, h2, h3, .font-serif {
+            font-family: var(--font-serif);
+        }
+
+        .text-primary { color: var(--primary); }
+        .bg-primary { background-color: var(--primary); }
+        .border-primary { border-color: var(--primary); }
+
+        /* Article Body Typography */
+        .article-body h2 {
+            font-family: var(--font-serif);
+            font-size: 1.875rem; /* text-3xl */
+            font-weight: 700;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .article-body p {
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+        .article-body a {
+            color: var(--primary);
+            text-decoration: underline;
+            font-weight: 600;
+        }
+        .article-body img {
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 0.5rem; /* rounded-lg */
+        }
+
+        /* Sticky sidebar for desktop */
+        .sticky-sidebar {
+            position: sticky;
+            top: 8rem; /* Adjust based on header height */
+            align-self: start;
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade-in-up {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="sticky top-0 bg-[var(--background)] bg-opacity-80 backdrop-blur-sm border-b border-[var(--border)] z-20">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <a href="veggie_map_1.html" class="flex items-center space-x-2 text-lg font-serif font-bold">
+                    <i data-lucide="leaf" class="text-primary"></i>
+                    <span>台中素食地圖</span>
+                </a>
+                <nav class="hidden md:flex items-center space-x-6">
+                    <a href="veggie_map_2.html" class="text-[var(--foreground)] hover:text-primary transition-colors">探索餐廳</a>
+                    <a href="veggie_map_3.html" class="text-primary font-bold">深度報導</a>
+                    <a href="veggie_map_4.html" class="text-[var(--foreground)] hover:text-primary transition-colors">社群食記</a>
+                </nav>
+                <div class="flex items-center space-x-4">
+                    <a href="#" class="hidden sm:block text-sm font-medium text-[var(--foreground)] hover:text-primary transition-colors">
+                        <i data-lucide="user-circle-2" class="w-6 h-6"></i>
+                    </a>
+                    <button class="md:hidden">
+                        <i data-lucide="menu"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto px-4 py-8">
+        <!-- Breadcrumbs -->
+        <nav class="text-sm text-[var(--muted-foreground)] mb-4 max-w-4xl mx-auto animate-fade-in-up">
+            <a href="veggie_map_3.html" class="hover:text-primary">深度報導</a>
+            <span class="mx-2">/</span>
+            <span class="text-[var(--foreground)]">台中必吃的10間寂靜素食</span>
+        </nav>
+
+        <!-- Article Header -->
+        <header class="max-w-4xl mx-auto text-center my-8 md:my-12 animate-fade-in-up" style="animation-delay: 0.1s;">
+            <h1 class="text-4xl md:text-5xl font-bold font-serif">台中必吃的10間寂靜素食</h1>
+            <div class="flex items-center justify-center gap-4 mt-6 text-sm text-[var(--muted-foreground)]">
+                <span><i data-lucide="user" class="inline w-4 h-4 mr-1"></i>美食家陳小姐</span>
+                <span><i data-lucide="calendar" class="inline w-4 h-4 mr-1"></i>2025年7月28日</span>
+            </div>
+        </header>
+
+        <!-- Feature Image -->
+        <figure class="max-w-6xl mx-auto mb-8 animate-fade-in-up" style="animation-delay: 0.2s;">
+            <img src="https://images.unsplash.com/photo-1540420773420-2850a86b2bda?q=80&w=1600&auto=format&fit=crop" class="w-full h-auto max-h-[500px] object-cover rounded-xl">
+        </figure>
+
+        <!-- Content Grid -->
+        <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 max-w-6xl mx-auto animate-fade-in-up" style="animation-delay: 0.3s;">
+            
+            <!-- Main Article Content -->
+            <article class="lg:col-span-8 article-body">
+                <p class="text-lg text-[var(--muted-foreground)]">在這座繁忙的城市中，我們為您尋找能夠沉澱心靈的角落。這些餐廳不僅提供美味的蔬食，更擁有讓人平靜的氛圍。無論是獨自一人，或是與三五好友，都能在這裡找到屬於自己的一方寧靜。</p>
+                
+                <h2>1. 森林旁邊</h2>
+                <p>第一間要推薦的是 <a href="veggie_map_5.html">森林旁邊</a>。這家餐廳的氛圍極好，彷彿一座都市裡的玻璃溫室。大片的落地窗讓陽光自然灑落，窗外的綠意與室內的木質調裝潢相得益彰。他們的餐點以西式創意蔬食為主，擺盤精緻，口味細膩，特別推薦他們的松露野菇燉飯，香氣濃郁，令人回味無窮。</p>
+                <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1200&auto=format&fit=crop" alt="森林旁邊">
+
+                <h2>2. 斐得蔬食</h2>
+                <p>接下來是 <a href="#">斐得蔬食</a>，他們的創意料理絕對會顛覆你對素食的想像。每一道菜都像是一件藝術品，不僅美味，更充滿驚喜。餐廳空間不大，但佈置得相當溫馨，很適合情侶約會或姊妹淘聚餐。他們的招牌是「未來肉漢堡」，口感和風味都讓人驚艷。</p>
+                
+                <h2>3. 善齋</h2>
+                <p>如果你偏愛中式料理，那絕對不能錯過 <a href="#">善齋</a>。這是一家經營多年的老字號，提供經典的台式素齋。沒有華麗的裝潢，卻有著最樸實、最溫暖的家常味。他們的炒飯粒粒分明，麵疙瘩Q彈有勁，是許多在地人從小吃到大的回憶。</p>
+                <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?q=80&w=1200&auto=format&fit=crop" alt="善齋">
+
+                <p>...文章的其餘部分...</p>
+            </article>
+
+            <!-- Right Sidebar (Sticky on large screens) -->
+            <aside class="lg:col-span-4">
+                <div class="sticky-sidebar space-y-6">
+                    <h3 class="font-serif font-bold text-xl border-b-2 border-primary pb-2">本文推薦餐廳</h3>
+                    
+                    <!-- Recommended Restaurant Card 1 -->
+                    <a href="veggie_map_5.html" class="flex items-center gap-4 p-3 bg-[var(--card)] border border-[var(--border)] rounded-lg hover:shadow-md transition-shadow">
+                        <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=200&auto=format&fit=crop" class="w-16 h-16 rounded-md object-cover">
+                        <div>
+                            <p class="font-bold">森林旁邊</p>
+                            <p class="text-sm text-[var(--muted-foreground)]">★★★★☆ (西屯區)</p>
+                        </div>
+                    </a>
+                    <!-- Recommended Restaurant Card 2 -->
+                    <a href="#" class="flex items-center gap-4 p-3 bg-[var(--card)] border border-[var(--border)] rounded-lg hover:shadow-md transition-shadow">
+                        <img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?q=80&w=200&auto=format&fit=crop" class="w-16 h-16 rounded-md object-cover">
+                        <div>
+                            <p class="font-bold">斐得蔬食</p>
+                            <p class="text-sm text-[var(--muted-foreground)]">★★★★★ (北區)</p>
+                        </div>
+                    </a>
+                    <!-- Recommended Restaurant Card 3 -->
+                    <a href="#" class="flex items-center gap-4 p-3 bg-[var(--card)] border border-[var(--border)] rounded-lg hover:shadow-md transition-shadow">
+                        <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?q=80&w=200&auto=format&fit=crop" class="w-16 h-16 rounded-md object-cover">
+                        <div>
+                            <p class="font-bold">善齋</p>
+                            <p class="text-sm text-[var(--muted-foreground)]">★★★★☆ (中區)</p>
+                        </div>
+                    </a>
+                     <!-- ... more cards ... -->
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[var(--secondary)] border-t border-[var(--border)] mt-16">
+        <div class="container mx-auto px-4 py-8">
+            <div class="flex flex-col md:flex-row justify-between items-center text-sm text-[var(--muted-foreground)]">
+                <div class="flex space-x-4 mb-4 md:mb-0">
+                    <a href="#" class="hover:text-primary">關於我們</a>
+                    <a href="#" class="hover:text-primary">合作夥伴方案</a>
+                    <a href="#" class="hover:text-primary">隱私權政策</a>
+                    <a href="#" class="hover:text-primary">服務條款</a>
+                </div>
+                <p>&copy; 2025 Taichung Vege Map. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
