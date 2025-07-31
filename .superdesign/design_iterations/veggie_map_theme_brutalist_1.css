@@ -1,0 +1,46 @@
+:root {
+  --background: oklch(0.98 0.02 95);
+  --foreground: oklch(0 0 0);
+  --card: oklch(0.98 0.02 95);
+  --card-foreground: oklch(0 0 0);
+  --popover: oklch(0.98 0.02 95);
+  --popover-foreground: oklch(0 0 0);
+  --primary: oklch(0.9 0.25 100); /* Bright Yellow */
+  --primary-foreground: oklch(0 0 0);
+  --secondary: oklch(0.9 0.01 95);
+  --secondary-foreground: oklch(0 0 0);
+  --muted: oklch(0.92 0.01 95);
+  --muted-foreground: oklch(0.3 0 0);
+  --accent: oklch(0.75 0.25 150); /* Vibrant Green for secondary accent */
+  --accent-foreground: oklch(0 0 0);
+  --destructive: oklch(0.6 0.22 20);
+  --destructive-foreground: oklch(0 0 0);
+  --border: oklch(0 0 0);
+  --input: oklch(0.98 0.02 95);
+  --ring: oklch(0 0 0);
+  --chart-1: oklch(0.9 0.25 100);
+  --chart-2: oklch(0.75 0.25 150);
+  --chart-3: oklch(0.6 0.22 20);
+  --chart-4: oklch(0.7 0.2 250);
+  --chart-5: oklch(0.8 0.15 300);
+  --sidebar: oklch(0.98 0.02 95);
+  --sidebar-foreground: oklch(0 0 0);
+  --sidebar-primary: oklch(0.9 0.25 100);
+  --sidebar-primary-foreground: oklch(0 0 0);
+  --sidebar-accent: oklch(0.75 0.25 150);
+  --sidebar-accent-foreground: oklch(0 0 0);
+  --sidebar-border: oklch(0 0 0);
+  --sidebar-ring: oklch(0 0 0);
+  --font-sans: 'Space Grotesk', sans-serif;
+  --font-serif: 'Georgia', serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+  --radius: 0px;
+  --shadow-sm: 2px 2px 0px 0px oklch(0 0 0);
+  --shadow: 4px 4px 0px 0px oklch(0 0 0);
+  --shadow-md: 6px 6px 0px 0px oklch(0 0 0);
+  --shadow-lg: 8px 8px 0px 0px oklch(0 0 0);
+  --shadow-xl: 10px 10px 0px 0px oklch(0 0 0);
+  --shadow-2xl: 12px 12px 0px 0px oklch(0 0 0);
+  --shadow-inner: inset 2px 2px 0px 0px oklch(0 0 0);
+  --spacing: 0.25rem;
+}
