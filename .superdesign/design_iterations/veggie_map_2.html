@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>探索餐廳 - 台中素食地圖</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="veggie_map_theme_1.css">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+    <style>
+        :root {
+            --background: oklch(0.98 0.01 90);
+            --foreground: oklch(0.25 0 0);
+            --primary: oklch(0.55 0.1 145);
+            --secondary: oklch(0.95 0.01 90);
+            --accent: oklch(0.97 0.01 90);
+            --border: oklch(0.9 0.01 90);
+            --font-sans: 'Noto Sans JP', sans-serif;
+            --font-serif: 'Noto Serif JP', serif;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--foreground);
+            font-family: var(--font-sans);
+        }
+
+        h1, h2, h3, .font-serif {
+            font-family: var(--font-serif);
+        }
+
+        .text-primary { color: var(--primary); }
+        .bg-primary { background-color: var(--primary); }
+        .ring-primary { --tw-ring-color: var(--primary); }
+        .border-primary { border-color: var(--primary); }
+        .bg-accent { background-color: var(--accent); }
+
+        /* Page Structure */
+        .page-grid {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            height: calc(100vh - 112px); /* Full height minus header and filters */
+        }
+
+        /* Animations & Transitions */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .restaurant-list > * {
+            opacity: 0;
+            animation: fadeInUp 0.5s ease-out forwards;
+        }
+        
+        .restaurant-list > *:nth-child(1) { animation-delay: 0.1s; }
+        .restaurant-list > *:nth-child(2) { animation-delay: 0.15s; }
+        .restaurant-list > *:nth-child(3) { animation-delay: 0.2s; }
+        .restaurant-list > *:nth-child(4) { animation-delay: 0.25s; }
+        .restaurant-list > *:nth-child(5) { animation-delay: 0.3s; }
+
+        .restaurant-card {
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        
+        /* Hover Sync Simulation */
+        .restaurant-card:hover {
+            background-color: var(--accent);
+            transform: translateX(4px);
+        }
+        
+        /* Mobile view transitions */
+        #map-view {
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .map-view-hidden {
+            transform: translateX(100%);
+        }
+
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="sticky top-0 bg-[var(--background)] bg-opacity-80 backdrop-blur-sm border-b border-[var(--border)] z-20">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <a href="veggie_map_1.html" class="flex items-center space-x-2 text-lg font-serif font-bold">
+                    <i data-lucide="leaf" class="text-primary"></i>
+                    <span>台中素食地圖</span>
+                </a>
+                <nav class="hidden md:flex items-center space-x-6">
+                    <a href="veggie_map_2.html" class="text-primary font-bold">探索餐廳</a>
+                    <a href="#" class="text-[var(--foreground)] hover:text-primary transition-colors">深度報導</a>
+                    <a href="#" class="text-[var(--foreground)] hover:text-primary transition-colors">社群食記</a>
+                </nav>
+                <div class="flex items-center space-x-4">
+                    <a href="#" class="hidden sm:block text-sm font-medium text-[var(--foreground)] hover:text-primary transition-colors">
+                        <i data-lucide="user-circle-2" class="w-6 h-6"></i>
+                    </a>
+                    <button class="md:hidden">
+                        <i data-lucide="menu"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Filters Bar -->
+    <div class="sticky top-16 bg-[var(--background)] border-b border-[var(--border)] z-10">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex flex-wrap items-center gap-3">
+                <span class="text-sm font-medium mr-2 hidden sm:inline">篩選：</span>
+                <div class="relative">
+                    <select class="appearance-none bg-[var(--secondary)] border border-[var(--border)] rounded-full py-2 pl-4 pr-10 text-sm focus:outline-none focus:ring-2 ring-primary">
+                        <option>所有區域</option>
+                        <option selected>西屯區</option>
+                        <option>北屯區</option>
+                        <option>南屯區</option>
+                    </select>
+                    <i data-lucide="chevron-down" class="w-4 h-4 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+                </div>
+                <div class="relative">
+                    <select class="appearance-none bg-[var(--secondary)] border border-[var(--border)] rounded-full py-2 pl-4 pr-10 text-sm focus:outline-none focus:ring-2 ring-primary">
+                        <option>所有特色</option>
+                        <option selected>有停車位</option>
+                        <option>適合聚餐</option>
+                        <option>純素</option>
+                    </select>
+                    <i data-lucide="chevron-down" class="w-4 h-4 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+                </div>
+                <div class="relative ml-auto">
+                     <select class="appearance-none bg-transparent border-none rounded-full py-2 pl-4 pr-10 text-sm font-medium focus:outline-none focus:ring-2 ring-primary">
+                        <option>排序：評價最高</option>
+                        <option>排序：距離最近</option>
+                        <option>排序：新開幕</option>
+                    </select>
+                    <i data-lucide="chevrons-up-down" class="w-4 h-4 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-[var(--muted-foreground)]"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto relative">
+        <div class="page-grid hidden md:grid">
+            <!-- Restaurant List -->
+            <div id="list-view" class="border-r border-[var(--border)] overflow-y-auto">
+                <div class="p-4 text-sm text-[var(--muted-foreground)]">
+                    共找到 15 間符合的餐廳
+                </div>
+                <div class="restaurant-list divide-y divide-[var(--border)]">
+                    <!-- Card 1 -->
+                    <div class="p-4 restaurant-card cursor-pointer">
+                        <div class="flex space-x-4">
+                            <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=400&auto=format&fit=crop" class="w-24 h-24 rounded-lg object-cover flex-shrink-0">
+                            <div class="flex-grow">
+                                <h3 class="font-bold font-serif">餐廳A (西屯區)</h3>
+                                <div class="flex items-center text-sm mt-1">
+                                    <span class="text-yellow-500 flex items-center">★★★★☆</span>
+                                    <span class="ml-2 text-[var(--muted-foreground)]">4.5 (120則評論)</span>
+                                </div>
+                                <p class="text-sm text-[var(--muted-foreground)] mt-1 line-clamp-2">氣氛很棒的創意料理，適合約會或朋友聚餐，推薦他們的松露燉飯。</p>
+                                <div class="mt-2 flex gap-2">
+                                    <span class="text-xs bg-[var(--secondary)] px-2 py-1 rounded-full">#有停車位</span>
+                                    <span class="text-xs bg-[var(--secondary)] px-2 py-1 rounded-full">#適合聚餐</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="p-4 restaurant-card cursor-pointer">
+                        <div class="flex space-x-4">
+                            <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790774?q=80&w=400&auto=format&fit=crop" class="w-24 h-24 rounded-lg object-cover flex-shrink-0">
+                            <div class="flex-grow">
+                                <h3 class="font-bold font-serif">餐廳C (西屯區)</h3>
+                                <div class="flex items-center text-sm mt-1">
+                                    <span class="text-yellow-500 flex items-center">★★★★☆</span>
+                                    <span class="ml-2 text-[var(--muted-foreground)]">4.2 (88則評論)</span>
+                                </div>
+                                <p class="text-sm text-[var(--muted-foreground)] mt-1 line-clamp-2">適合帶長輩一起來的家庭餐廳，菜色豐富，口味溫和不油膩。</p>
+                                <div class="mt-2 flex gap-2">
+                                    <span class="text-xs bg-[var(--secondary)] px-2 py-1 rounded-full">#有停車位</span>
+                                    <span class="text-xs bg-[var(--secondary)] px-2 py-1 rounded-full">#家庭餐廳</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Add more cards as needed -->
+                </div>
+            </div>
+            <!-- Map -->
+            <div class="bg-gray-200">
+                 <img src="https://placehold.co/1200x900/e2e8f0/abb2bf?text=Map%20Placeholder" class="w-full h-full object-cover" alt="Map Placeholder">
+            </div>
+        </div>
+        
+        <!-- Mobile View -->
+        <div class="md:hidden">
+            <div id="mobile-list-view" class="p-2">
+                 <div class="p-2 text-sm text-[var(--muted-foreground)]">
+                    共找到 15 間符合的餐廳
+                </div>
+                <div class="restaurant-list space-y-2">
+                    <!-- Mobile Card 1 -->
+                    <div class="p-3 restaurant-card cursor-pointer border border-[var(--border)] rounded-lg">
+                        <div class="flex space-x-4">
+                            <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=400&auto=format&fit=crop" class="w-20 h-20 rounded-lg object-cover flex-shrink-0">
+                            <div>
+                                <h3 class="font-bold font-serif text-base">餐廳A (西屯區)</h3>
+                                <div class="flex items-center text-xs mt-1">
+                                    <span class="text-yellow-500 flex items-center">★★★★☆</span>
+                                    <span class="ml-2 text-[var(--muted-foreground)]">4.5</span>
+                                </div>
+                                <div class="mt-1 flex gap-1">
+                                    <span class="text-xs bg-[var(--secondary)] px-2 py-1 rounded-full">#停車</span>
+                                    <span class="text-xs bg-[var(--secondary)] px-2 py-1 rounded-full">#聚餐</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Mobile Card 2 -->
+                    <div class="p-3 restaurant-card cursor-pointer border border-[var(--border)] rounded-lg">
+                        <div class="flex space-x-4">
+                            <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790774?q=80&w=400&auto=format&fit=crop" class="w-20 h-20 rounded-lg object-cover flex-shrink-0">
+                            <div>
+                                <h3 class="font-bold font-serif text-base">餐廳C (西屯區)</h3>
+                                <div class="flex items-center text-xs mt-1">
+                                    <span class="text-yellow-500 flex items-center">★★★★☆</span>
+                                    <span class="ml-2 text-[var(--muted-foreground)]">4.2</span>
+                                </div>
+                                <div class="mt-1 flex gap-1">
+                                    <span class="text-xs bg-[var(--secondary)] px-2 py-1 rounded-full">#停車</span>
+                                    <span class="text-xs bg-[var(--secondary)] px-2 py-1 rounded-full">#家庭</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Mobile Map View (Initially hidden) -->
+            <div id="map-view" class="fixed inset-0 top-16 bg-gray-200 z-30 map-view-hidden">
+                <img src="https://placehold.co/600x800/e2e8f0/abb2bf?text=Map%20Placeholder" class="w-full h-full object-cover" alt="Map Placeholder">
+                <button id="show-list-btn" class="absolute top-4 left-4 bg-[var(--background)] rounded-full p-3 shadow-lg">
+                    <i data-lucide="list"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile FAB -->
+        <div class="md:hidden fixed bottom-6 right-6 z-20">
+            <button id="show-map-btn" class="bg-primary text-[var(--primary-foreground)] rounded-full shadow-lg flex items-center gap-2 px-4 py-3">
+                <i data-lucide="map"></i>
+                <span class="text-sm font-bold">顯示地圖</span>
+            </button>
+        </div>
+    </main>
+
+    <script>
+        lucide.createIcons();
+
+        const showMapBtn = document.getElementById('show-map-btn');
+        const showListBtn = document.getElementById('show-list-btn');
+        const mapView = document.getElementById('map-view');
+
+        if (showMapBtn && showListBtn && mapView) {
+            showMapBtn.addEventListener('click', () => {
+                mapView.classList.remove('map-view-hidden');
+            });
+
+            showListBtn.addEventListener('click', () => {
+                mapView.classList.add('map-view-hidden');
+            });
+        }
+    </script>
+</body>
+</html>
