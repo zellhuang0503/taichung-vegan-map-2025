@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>社群食記 - 台中素食地圖</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="veggie_map_theme_1.css">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+    <style>
+        :root {
+            --background: oklch(0.98 0.01 90);
+            --foreground: oklch(0.25 0 0);
+            --primary: oklch(0.55 0.1 145);
+            --secondary: oklch(0.95 0.01 90);
+            --font-sans: 'Noto Sans JP', sans-serif;
+            --font-serif: 'Noto Serif JP', serif;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--foreground);
+            font-family: var(--font-sans);
+        }
+
+        h1, h2, h3, .font-serif {
+            font-family: var(--font-serif);
+        }
+
+        .text-primary { color: var(--primary); }
+        .bg-primary { background-color: var(--primary); }
+
+        /* Masonry Layout */
+        .masonry-container {
+            column-gap: 1.5rem; /* Corresponds to gap-6 in Tailwind */
+        }
+
+        @media (min-width: 640px) {
+            .masonry-container {
+                column-count: 2;
+            }
+        }
+        @media (min-width: 768px) {
+            .masonry-container {
+                column-count: 3;
+            }
+        }
+        @media (min-width: 1024px) {
+            .masonry-container {
+                column-count: 4;
+            }
+        }
+
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 1.5rem; /* Corresponds to gap-6 in Tailwind */
+            display: inline-block;
+            width: 100%;
+        }
+        
+        .masonry-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Card hover effect */
+        .review-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .review-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade-in-up {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="sticky top-0 bg-[var(--background)] bg-opacity-80 backdrop-blur-sm border-b border-[var(--border)] z-20">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <a href="veggie_map_1.html" class="flex items-center space-x-2 text-lg font-serif font-bold">
+                    <i data-lucide="leaf" class="text-primary"></i>
+                    <span>台中素食地圖</span>
+                </a>
+                <nav class="hidden md:flex items-center space-x-6">
+                    <a href="veggie_map_2.html" class="text-[var(--foreground)] hover:text-primary transition-colors">探索餐廳</a>
+                    <a href="veggie_map_3.html" class="text-[var(--foreground)] hover:text-primary transition-colors">深度報導</a>
+                    <a href="veggie_map_4.html" class="text-primary font-bold">社群食記</a>
+                </nav>
+                <div class="flex items-center space-x-4">
+                    <a href="#" class="hidden sm:block text-sm font-medium text-[var(--foreground)] hover:text-primary transition-colors">
+                        <i data-lucide="user-circle-2" class="w-6 h-6"></i>
+                    </a>
+                    <button class="md:hidden">
+                        <i data-lucide="menu"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto px-4 py-12">
+        <!-- Page Header -->
+        <div class="text-center py-8 animate-fade-in-up">
+            <h1 class="text-4xl md:text-5xl font-bold font-serif">社群食記</h1>
+            <p class="text-lg text-[var(--muted-foreground)] mt-4 max-w-2xl mx-auto">看看大家分享了哪些真實的蔬食體驗，找到你的下一個口袋名單。</p>
+        </div>
+
+        <!-- Sort Options -->
+        <div class="flex justify-end mb-6 animate-fade-in-up" style="animation-delay: 0.2s;">
+            <div class="relative">
+                <select class="appearance-none bg-[var(--secondary)] border border-[var(--border)] rounded-full py-2 pl-4 pr-10 text-sm focus:outline-none focus:ring-2 ring-primary">
+                    <option>排序: 最新發佈</option>
+                    <option>排序: 最多按讚</option>
+                    <option>排序: 評價最高</option>
+                </select>
+                <i data-lucide="chevron-down" class="w-4 h-4 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+            </div>
+        </div>
+
+        <!-- Masonry Grid -->
+        <div class="masonry-container animate-fade-in-up" style="animation-delay: 0.4s;">
+            <!-- Review Card 1 -->
+            <div class="masonry-item">
+                <div class="review-card bg-[var(--card)] border border-[var(--border)] rounded-xl overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=800&auto=format&fit=crop" alt="Review photo">
+                    <div class="p-4">
+                        <p class="text-sm mb-3">"超棒的酪梨沙拉，食材非常新鮮，醬料也很特別，是夏天的完美選擇！"</p>
+                        <div class="flex items-center justify-between text-xs text-[var(--muted-foreground)]">
+                            <div class="flex items-center gap-2">
+                                <img src="https://i.pravatar.cc/24?u=userA" class="w-6 h-6 rounded-full" alt="avatar">
+                                <span>User A</span>
+                            </div>
+                            <span>★★★★☆ @ 森林旁邊</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Review Card 2 (Taller image) -->
+            <div class="masonry-item">
+                <div class="review-card bg-[var(--card)] border border-[var(--border)] rounded-xl overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1478144592103-25e218a0c110?q=80&w=800&auto=format&fit=crop&h=1200" alt="Review photo">
+                    <div class="p-4">
+                        <p class="text-sm mb-3">"他們的純素肉桂捲真的太神奇了，外酥內軟，搭配一杯燕麥奶拿鐵，完美的下午茶。"</p>
+                        <div class="flex items-center justify-between text-xs text-[var(--muted-foreground)]">
+                            <div class="flex items-center gap-2">
+                                <img src="https://i.pravatar.cc/24?u=userB" class="w-6 h-6 rounded-full" alt="avatar">
+                                <span>Vegan Jenny</span>
+                            </div>
+                            <span>★★★★★ @ Veganday</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Review Card 3 -->
+            <div class="masonry-item">
+                <div class="review-card bg-[var(--card)] border border-[var(--border)] rounded-xl overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?q=80&w=800&auto=format&fit=crop" alt="Review photo">
+                    <div class="p-4">
+                        <p class="text-sm mb-3">"CP值很高的選擇，百元就能吃到豐盛的蔬食自助餐，菜色很多樣。"</p>
+                        <div class="flex items-center justify-between text-xs text-[var(--muted-foreground)]">
+                            <div class="flex items-center gap-2">
+                                <img src="https://i.pravatar.cc/24?u=userC" class="w-6 h-6 rounded-full" alt="avatar">
+                                <span>老饕張大哥</span>
+                            </div>
+                            <span>★★★★☆ @ 善齋</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Add more cards with varying image heights to see the masonry effect -->
+             <div class="masonry-item">
+                <div class="review-card bg-[var(--card)] border border-[var(--border)] rounded-xl overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17021?q=80&w=800&auto=format&fit=crop&h=1000" alt="Review photo">
+                    <div class="p-4">
+                        <p class="text-sm mb-3">"巷弄裡的小驚喜，老闆很親切，餐點有媽媽的味道。"</p>
+                        <div class="flex items-center justify-between text-xs text-[var(--muted-foreground)]">
+                            <div class="flex items-center gap-2">
+                                <img src="https://i.pravatar.cc/24?u=userD" class="w-6 h-6 rounded-full" alt="avatar">
+                                <span>艾蜜莉</span>
+                            </div>
+                            <span>★★★★★ @ 小巷素食</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             <div class="masonry-item">
+                <div class="review-card bg-[var(--card)] border border-[var(--border)] rounded-xl overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1496412705862-e0088f16f791?q=80&w=800&auto=format&fit=crop" alt="Review photo">
+                    <div class="p-4">
+                        <p class="text-sm mb-3">"氣氛很好，適合晚上跟朋友來小酌，他們的炸物拼盤很讚。"</p>
+                        <div class="flex items-center justify-between text-xs text-[var(--muted-foreground)]">
+                            <div class="flex items-center gap-2">
+                                <img src="https://i.pravatar.cc/24?u=userE" class="w-6 h-6 rounded-full" alt="avatar">
+                                <span>旅食小光</span>
+                            </div>
+                            <span>★★★★☆ @ Veggie Bar</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Load More Button -->
+        <div class="text-center mt-12 animate-fade-in-up" style="animation-delay: 0.6s;">
+            <button class="bg-primary text-[var(--primary-foreground)] font-bold py-3 px-8 rounded-full hover:opacity-90 transition-opacity">
+                載入更多
+            </button>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[var(--secondary)] border-t border-[var(--border)] mt-16">
+        <div class="container mx-auto px-4 py-8">
+            <div class="flex flex-col md:flex-row justify-between items-center text-sm text-[var(--muted-foreground)]">
+                <div class="flex space-x-4 mb-4 md:mb-0">
+                    <a href="#" class="hover:text-primary">關於我們</a>
+                    <a href="#" class="hover:text-primary">合作夥伴方案</a>
+                    <a href="#" class="hover:text-primary">隱私權政策</a>
+                    <a href="#" class="hover:text-primary">服務條款</a>
+                </div>
+                <p>&copy; 2025 Taichung Vege Map. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
