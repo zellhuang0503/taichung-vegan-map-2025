@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>發表新食記 - 台中素食地圖</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="veggie_map_theme_1.css">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+    <style>
+        :root {
+            --background: oklch(0.98 0.01 90);
+            --foreground: oklch(0.25 0 0);
+            --primary: oklch(0.55 0.1 145);
+            --secondary: oklch(0.95 0.01 90);
+            --border: oklch(0.9 0.01 90);
+            --input: oklch(0.97 0.01 90);
+            --font-sans: 'Noto Sans JP', sans-serif;
+            --font-serif: 'Noto Serif JP', serif;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--foreground);
+            font-family: var(--font-sans);
+        }
+
+        h1, h2, h3, .font-serif {
+            font-family: var(--font-serif);
+        }
+
+        .text-primary { color: var(--primary); }
+        .bg-primary { background-color: var(--primary); }
+        .border-primary { border-color: var(--primary); }
+        .ring-primary { --tw-ring-color: var(--primary); }
+        .bg-input { background-color: var(--input); }
+
+        .form-section {
+            background-color: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            padding: 1.5rem 2rem;
+        }
+        
+        .form-label {
+            font-size: 1.125rem; /* text-lg */
+            font-weight: 700;
+            font-family: var(--font-serif);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .form-input {
+            width: 100%;
+            background-color: var(--input);
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            padding: 0.75rem 1rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            --tw-ring-opacity: 0.5;
+            box-shadow: 0 0 0 2px var(--ring-color);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade-in-up {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="sticky top-0 bg-[var(--background)] bg-opacity-80 backdrop-blur-sm border-b border-[var(--border)] z-20">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <a href="veggie_map_1.html" class="flex items-center space-x-2 text-lg font-serif font-bold">
+                    <i data-lucide="leaf" class="text-primary"></i>
+                    <span>台中素食地圖</span>
+                </a>
+                <nav class="hidden md:flex items-center space-x-6">
+                    <a href="veggie_map_2.html" class="text-[var(--foreground)] hover:text-primary transition-colors">探索餐廳</a>
+                    <a href="veggie_map_3.html" class="text-[var(--foreground)] hover:text-primary transition-colors">深度報導</a>
+                    <a href="veggie_map_4.html" class="text-[var(--foreground)] hover:text-primary transition-colors">社群食記</a>
+                </nav>
+                <div class="flex items-center space-x-4">
+                    <a href="#" class="hidden sm:block text-sm font-medium text-[var(--foreground)] hover:text-primary transition-colors">
+                        <i data-lucide="user-circle-2" class="w-6 h-6"></i>
+                    </a>
+                    <button class="md:hidden">
+                        <i data-lucide="menu"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto px-4 py-12">
+        <!-- Page Header -->
+        <div class="text-center py-8 animate-fade-in-up">
+            <h1 class="text-4xl md:text-5xl font-bold font-serif">發表新食記</h1>
+            <p class="text-lg text-[var(--muted-foreground)] mt-4 max-w-2xl mx-auto">分享您的用餐體驗，幫助更多人發現美好的蔬食。</p>
+        </div>
+
+        <!-- Form -->
+        <div class="max-w-3xl mx-auto space-y-8 animate-fade-in-up" style="animation-delay: 0.2s;">
+            <!-- Step 1: Restaurant Info -->
+            <section class="form-section">
+                <label class="form-label">1. 餐廳資訊</label>
+                <div>
+                    <p class="text-sm font-medium mb-2">餐廳名稱*</p>
+                    <div class="relative">
+                        <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[var(--muted-foreground)]"></i>
+                        <input type="text" placeholder="輸入餐廳名稱... (系統將自動搜尋)" class="form-input pl-10">
+                    </div>
+                    <!-- Search results would appear here dynamically -->
+                </div>
+            </section>
+
+            <!-- Step 2: Overall Rating -->
+            <section class="form-section">
+                <label class="form-label">2. 整體評價</label>
+                <div>
+                    <p class="text-sm font-medium mb-3">為這次的體驗打個分數吧！*</p>
+                    <div class="flex items-center space-x-2 text-gray-300 text-4xl">
+                        <i data-lucide="star" class="cursor-pointer hover:text-yellow-400 transition-colors"></i>
+                        <i data-lucide="star" class="cursor-pointer hover:text-yellow-400 transition-colors"></i>
+                        <i data-lucide="star" class="cursor-pointer hover:text-yellow-400 transition-colors"></i>
+                        <i data-lucide="star" class="cursor-pointer hover:text-yellow-400 transition-colors"></i>
+                        <i data-lucide="star" class="cursor-pointer hover:text-yellow-400 transition-colors"></i>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Step 3: Aspect Ratings -->
+            <section class="form-section">
+                <label class="form-label">3. 各面向評分</label>
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <p class="text-sm font-medium">餐點美味</p>
+                        <div class="flex items-center space-x-2 text-gray-300 text-2xl">
+                            <i data-lucide="circle" class="cursor-pointer hover:text-primary transition-colors"></i>
+                            <i data-lucide="circle" class="cursor-pointer hover:text-primary transition-colors"></i>
+                            <i data-lucide="circle" class="cursor-pointer hover:text-primary transition-colors"></i>
+                            <i data-lucide="circle" class="cursor-pointer hover:text-primary transition-colors"></i>
+                            <i data-lucide="circle" class="cursor-pointer hover:text-primary transition-colors"></i>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <p class="text-sm font-medium">環境氛圍</p>
+                        <div class="flex items-center space-x-2 text-gray-300 text-2xl">
+                            <i data-lucide="circle" class="cursor-pointer hover:text-primary transition-colors"></i>
+                            <i data-lucide="circle" class="cursor-pointer hover:text-primary transition-colors"></i>
+                            <i data-lucide="circle" class="cursor-pointer hover:text-primary transition-colors"></i>
+                            <i data-lucide="circle" class="cursor-pointer hover:text-primary transition-colors"></i>
+                            <i data-lucide="circle" class="cursor-pointer hover:text-primary transition-colors"></i>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <p class="text-sm font-medium">服務品質</p>
+                        <div class="flex items-center space-x-2 text-gray-300 text-2xl">
+                            <i data-lucide="circle" class="cursor-pointer hover:text-primary transition-colors"></i>
+                            <i data-lucide="circle" class="cursor-pointer hover:text-primary transition-colors"></i>
+                            <i data-lucide="circle" class="cursor-pointer hover:text-primary transition-colors"></i>
+                            <i data-lucide="circle" class="cursor-pointer hover:text-primary transition-colors"></i>
+                            <i data-lucide="circle" class="cursor-pointer hover:text-primary transition-colors"></i>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <p class="text-sm font-medium">CP值</p>
+                        <div class="flex items-center space-x-2 text-gray-300 text-2xl">
+                            <i data-lucide="circle" class="cursor-pointer hover:text-primary transition-colors"></i>
+                            <i data-lucide="circle" class="cursor-pointer hover:text-primary transition-colors"></i>
+                            <i data-lucide="circle" class="cursor-pointer hover:text-primary transition-colors"></i>
+                            <i data-lucide="circle" class="cursor-pointer hover:text-primary transition-colors"></i>
+                            <i data-lucide="circle" class="cursor-pointer hover:text-primary transition-colors"></i>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Step 4: Your Review -->
+            <section class="form-section">
+                <label class="form-label">4. 您的食記</label>
+                <div class="space-y-4">
+                    <div>
+                        <p class="text-sm font-medium mb-2">食記標題*</p>
+                        <input type="text" placeholder="Ex: 氣氛超棒的創意料理，會再訪！" class="form-input">
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium mb-2">食記內文</p>
+                        <textarea placeholder="寫下您的真實感受..." rows="6" class="form-input"></textarea>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Step 5: Upload Photos -->
+            <section class="form-section">
+                <label class="form-label">5. 上傳照片</label>
+                <div>
+                    <div class="mt-2 flex justify-center rounded-lg border border-dashed border-[var(--border)] px-6 py-10">
+                        <div class="text-center">
+                            <i data-lucide="image" class="mx-auto h-12 w-12 text-[var(--muted-foreground)]"></i>
+                            <div class="mt-4 flex text-sm leading-6 text-[var(--muted-foreground)]">
+                                <label for="file-upload" class="relative cursor-pointer rounded-md font-semibold text-primary focus-within:outline-none focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 hover:text-primary">
+                                    <span>點擊此處上傳</span>
+                                    <input id="file-upload" name="file-upload" type="file" class="sr-only" multiple>
+                                </label>
+                                <p class="pl-1">或拖曳照片至此</p>
+                            </div>
+                            <p class="text-xs leading-5 text-[var(--muted-foreground)]">PNG, JPG, GIF up to 10MB</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Submit Button -->
+            <div class="text-center pt-6">
+                <button type="submit" class="bg-primary text-[var(--primary-foreground)] font-bold py-4 px-12 rounded-full hover:opacity-90 transition-opacity text-lg">
+                    發表食記
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[var(--secondary)] border-t border-[var(--border)] mt-16">
+        <div class="container mx-auto px-4 py-8">
+            <div class="flex flex-col md:flex-row justify-between items-center text-sm text-[var(--muted-foreground)]">
+                <div class="flex space-x-4 mb-4 md:mb-0">
+                    <a href="#" class="hover:text-primary">關於我們</a>
+                    <a href="#" class="hover:text-primary">合作夥伴方案</a>
+                    <a href="#" class="hover:text-primary">隱私權政策</a>
+                    <a href="#" class="hover:text-primary">服務條款</a>
+                </div>
+                <p>&copy; 2025 Taichung Vege Map. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
