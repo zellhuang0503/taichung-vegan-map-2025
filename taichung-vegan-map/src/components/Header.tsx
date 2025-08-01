@@ -1,7 +1,7 @@
 import React from 'react'
 import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material'
 import { Link } from 'react-router-dom'
-import { MapPin, Restaurant, PlusCircle } from 'lucide-react'
+import { Map as MapIcon, Restaurant as RestaurantIcon, AddCircle as AddCircleIcon } from '@mui/icons-material'
 
 const Header: React.FC = () => {
   return (
@@ -15,7 +15,7 @@ const Header: React.FC = () => {
             color="inherit" 
             component={Link} 
             to="/"
-            startIcon={<MapPin size={18} />}
+            startIcon={<MapIcon />}
           >
             首頁
           </Button>
@@ -23,7 +23,7 @@ const Header: React.FC = () => {
             color="inherit" 
             component={Link} 
             to="/restaurants"
-            startIcon={<Restaurant size={18} />}
+            startIcon={<RestaurantIcon />}
           >
             餐廳列表
           </Button>
@@ -31,7 +31,7 @@ const Header: React.FC = () => {
             color="inherit" 
             component={Link} 
             to="/write-review"
-            startIcon={<PlusCircle size={18} />}
+            startIcon={<AddCircleIcon />}
           >
             撰寫食記
           </Button>

@@ -1,126 +1,112 @@
-import React, { useEffect, useState } from 'react'
-import { Box, Typography, Button, Grid, Card, CardContent, Container } from '@mui/material'
-import { MapPin, Search, Star, Users } from 'lucide-react'
+import React from 'react'
+import {
+  Box,
+  Container,
+  Typography,
+  Button,
+  Card,
+  CardContent,
+  Stack
+} from '@mui/material'
+import { RateReview as RateReviewIcon } from '@mui/icons-material'
+import MapView from '../components/MapView'
 
 const HomePage: React.FC = () => {
-  const [userLocation, setUserLocation] = useState<{lat: number, lng: number} | null>(null)
-
-  useEffect(() => {
-    // 獲取用戶位置
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setUserLocation({
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
-          })
-        },
-        (error) => {
-          console.error('Error getting location:', error)
-        }
-      )
-    }
-  }, [])
-
-  const features = [
+  const sampleRestaurants = [
     {
-      icon: <MapPin size={32} className="text-primary" />,
-      title: "精準定位",
-      description: "快速找到您附近的素食餐廳"
+      id: '1',
+      name: '綠色天堂素食餐廳',
+      lat: 24.1369,
+      lng: 120.6869,
+      address: '台中市西區公益路123號',
+      phone: '04-1234-5678',
+      rating: 4.5,
+      priceLevel: 2,
+      vegetarianType: '全素'
     },
     {
-      icon: <Search size={32} className="text-primary" />,
-      title: "智能搜尋",
-      description: "依據素食類型、料理風格精準篩選"
+      id: '2',
+      name: '養生素食坊',
+      lat: 24.1400,
+      lng: 120.6900,
+      address: '台中市西區美村路456號',
+      phone: '04-8765-4321',
+      rating: 4.2,
+      priceLevel: 1,
+      vegetarianType: '蛋奶素'
     },
     {
-      icon: <Star size={32} className="text-primary" />,
-      title: "真實評價",
-      description: "來自素食社群的可靠食記與評分"
-    },
-    {
-      icon: <Users size={32} className="text-primary" />,
-      title: "社群互動",
-      description: "分享您的素食體驗，建立連結"
+      id: '3',
+      name: '禪悅素食',
+      lat: 24.1340,
+      lng: 120.6840,
+      address: '台中市西區忠明南路789號',
+      phone: '04-2468-1357',
+      rating: 4.7,
+      priceLevel: 3,
+      vegetarianType: '五辛素'
     }
   ]
 
   return (
-    <Container maxWidth="lg" sx={{ py: 4 }}>
-      {/* Hero Section */}
-      <Box 
-        sx={{ 
-          textAlign: 'center', 
-          py: 8, 
-          background: 'linear-gradient(135deg, #4CAF50 0%, #81C784 100%)',
-          color: 'white',
-          borderRadius: 2,
-          mb: 6
-        }}
-      >
-        <Typography variant="h2" component="h1" gutterBottom>
-          台中素食地圖
-        </Typography>
-        <Typography variant="h5" component="p" gutterBottom>
-          探索台中最完整的素食餐廳
-        </Typography>
-        <Typography variant="body1" sx={{ mb: 4, opacity: 0.9 }}>
-          精準搜尋、真實評價、社群分享，讓您的素食生活更豐富
-        </Typography>
-        <Button 
-          variant="contained" 
-          size="large" 
-          sx={{ 
-            bgcolor: 'white', 
-            color: 'primary.main',
-            '&:hover': { bgcolor: 'grey.100' }
-          }}
-        >
-          開始探索
-        </Button>
+    <Box sx={{ flexGrow: 1 }}>
+      {/* 地圖區塊 */}
+      <Box sx={{ height: '400px', mb: 4 }}>
+        <MapView 
+          restaurants={sampleRestaurants}
+          zoom={15}
+          showUserLocation={true}
+        />
       </Box>
 
-      {/* Features Section */}
-      <Box sx={{ mb: 6 }}>
-        <Typography variant="h4" component="h2" textAlign="center" gutterBottom>
-          主要功能
-        </Typography>
-        <Grid container spacing={4} sx={{ mt: 2 }}>
-          {features.map((feature, index) => (
-            <Grid item xs={12} sm={6} md={3} key={index}>
-              <Card sx={{ height: '100%', textAlign: 'center', p: 2 }}>
-                <CardContent>
-                  <Box sx={{ mb: 2 }}>
-                    {feature.icon}
-                  </Box>
-                  <Typography variant="h6" component="h3" gutterBottom>
-                    {feature.title}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    {feature.description}
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
-      </Box>
-
-      {/* Location Info */}
-      {userLocation && (
-        <Box sx={{ textAlign: 'center', p: 3, bgcolor: 'grey.50', borderRadius: 2 }}>
-          <Typography variant="h6" gutterBottom>
-            您的位置
+      <Container maxWidth="lg" sx={{ py: 4 }}>
+        <Box textAlign="center" mb={6}>
+          <Typography variant="h2" component="h1" gutterBottom color="primary">
+            台中素食地圖
           </Typography>
-          <Typography variant="body2" color="text.secondary">
-            緯度: {userLocation.lat.toFixed(4)}, 經度: {userLocation.lng.toFixed(4)}
-          </Typography>
-          <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
-            正在為您載入附近的素食餐廳...
+          <Typography variant="h5" color="text.secondary" paragraph>
+            探索台中最完整的素食餐廳
           </Typography>
         </Box>
-      )}
-    </Container>
+
+        <Stack spacing={3} direction="row" flexWrap="wrap" justifyContent="center">
+          {sampleRestaurants.map((restaurant) => (
+            <Card key={restaurant.id} sx={{ width: 300, mb: 2 }}>
+              <CardContent>
+                <Typography variant="h6" component="h3">
+                  {restaurant.name}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  {restaurant.address}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  類型：{restaurant.vegetarianType}
+                </Typography>
+              </CardContent>
+            </Card>
+          ))}
+        </Stack>
+
+        <Box textAlign="center" mt={4}>
+          <Button
+            variant="contained"
+            size="large"
+            href="/restaurants"
+            sx={{ mr: 2 }}
+          >
+            查看所有餐廳
+          </Button>
+          <Button
+            variant="outlined"
+            size="large"
+            startIcon={<RateReviewIcon />}
+            href="/write-review"
+          >
+            撰寫食記
+          </Button>
+        </Box>
+      </Container>
+    </Box>
   )
 }
 

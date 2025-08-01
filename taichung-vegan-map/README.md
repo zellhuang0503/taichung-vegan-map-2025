@@ -30,11 +30,13 @@
 ### 1. 環境設定
 
 複製環境變數範例檔案：
+
 ```bash
 cp .env.example .env
 ```
 
 編輯 `.env` 檔案，填入您的API金鑰：
+
 ```env
 VITE_GOOGLE_MAPS_API_KEY=your_google_maps_api_key_here
 VITE_SUPABASE_URL=your_supabase_project_url
@@ -76,15 +78,18 @@ src/
 ## 🔧 開發指南
 
 ### 新增頁面
+
 1. 在 `src/pages/` 建立新的頁面組件
 2. 在 `src/App.tsx` 新增路由
 3. 更新 `src/components/Header.tsx` 的導航連結
 
 ### 使用API
+
 - Google Maps: 使用 `src/services/maps.ts`
 - Supabase: 使用 `src/services/supabase.ts`
 
 ### 樣式指南
+
 - 使用Material-UI組件和主題系統
 - 主色調：綠色 (#4CAF50) - 象徵自然與健康
 - 輔助色：橙色 (#FF9800) - 重點按鈕與提醒
@@ -92,6 +97,7 @@ src/
 ## 🌐 部署
 
 ### Netlify部署
+
 1. 連結GitHub儲存庫
 2. 設定環境變數
 3. 建構指令：`npm run build`
@@ -102,7 +108,7 @@ src/
 - [x] 專案初始化
 - [x] 基礎路由設定
 - [x] 主要頁面框架
-- [ ] Google Maps整合
+- [x] Google Maps整合
 - [ ] Supabase資料庫連接
 - [ ] 餐廳列表功能
 - [ ] 搜尋與篩選
@@ -113,9 +119,13 @@ src/
 ## 🤝 貢獻指南
 
 1. Fork 專案
+
 2. 建立功能分支 (`git checkout -b feature/AmazingFeature`)
+
 3. 提交變更 (`git commit -m 'Add some AmazingFeature'`)
+
 4. 推送到分支 (`git push origin feature/AmazingFeature`)
+
 5. 開啟 Pull Request
 
 ## 📄 授權
