@@ -1,8 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { ThemeProvider, createTheme } from '@mui/material/styles'
+import { ThemeProvider } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
 
+// Import the custom theme
+import theme from './theme';
 
 // Pages
 import HomePage from './pages/HomePage'
@@ -12,20 +14,6 @@ import WriteReviewPage from './pages/WriteReviewPage'
 
 // Components
 import Header from './components/Header'
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#4CAF50',
-    },
-    secondary: {
-      main: '#FF9800',
-    },
-  },
-  typography: {
-    fontFamily: '"Noto Sans JP", "Noto Sans TC", sans-serif',
-  },
-})
 
 const queryClient = new QueryClient()
 
